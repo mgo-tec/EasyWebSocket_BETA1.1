@@ -5,8 +5,7 @@ Beta version 1.1
 ---> https://www.mgo-tec.com
 
 Please rewrite their own the ssid and password.
-Please rewrite their own local IP address of "/data/spiffs_01.txt" in the sketch folder.
-
+Please rewrite their own local IP address of "/data/spiffs_only.html" in the sketch folder.
 
 The MIT License (MIT)
 
@@ -43,14 +42,6 @@ byte cnt = 0;
 
 EasyWebSocket ews;
 
-String html_str1;
-String html_str2;
-String html_str3;
-String html_str4;
-String html_str5;
-String html_str6;
-String html_str7;
-
 String ret_str;
 
 int PingSendTime = 3000;
@@ -60,62 +51,10 @@ int PingSendTime = 3000;
 #define ledPin3 14
 
 void setup() 
-{
-  //The assignment in the Body element of the browser of HTML to a String variable
-  html_str1 = "<body text='white' bgcolor='black'>\r\n";
-  html_str1 += "<font size=3>\r\n";
-  html_str1 += "ESP-WROOM-02(ESP8266)\r\n";
-  html_str1 += "<br>\r\n";
-  html_str1 += "WebSocket Test\r\n";
-  html_str1 += "</font><br>\r\n";
-  html_str1 += ews.EWS_BrowserSendRate();
-  html_str1 += "<br>\r\n";
-
-  html_str1 += "from WROOM(ESP8266) DATA =\r\n";
-  html_str1 += ews.EWS_BrowserReceiveTextTag("text",20,"RED");
-  html_str1 += "<br>\r\n";
-  html_str1 += "WS Status = \r\n";
-  html_str1 += ews.EWS_Status_Text(20,"#FF00FF");
-  html_str1 += "<br>\r\n";
-  
-  html_str2 = "<br>LED BLUE... Dim\r\n";
-  html_str2 += ews.EWS_Canvas_Slider_T("BLUE",200,40,"#777777","#0000ff");
-  html_str2 += "<br>LED GREEN Dim\r\n";
-  html_str2 += ews.EWS_Canvas_Slider_T("GREEN",200,40,"#777777","#00ff00");
-  html_str3 = "<br>LED RED..... Dim\r\n";
-  html_str3 += ews.EWS_Canvas_Slider_T("RED",200,40,"#777777","#ff0000");
-  html_str3 += "<br>LED RGB..... Dim\r\n";
-  html_str3 += ews.EWS_Canvas_Slider_T("_RGB",200,40,"#777777","#ffff00");
-  
-  html_str4 = "<br><br>\r\n";
-  html_str4 += "BLUE... \r\n";
-  html_str4 += ews.EWS_OnOff_Button("blue",60,25,15,"#FFFFFF","#0000FF");
-  html_str4 += ews.EWS_Touch_Slider_T("blue", "Txt1");
-  html_str4 += ews.EWS_Sl_Text("Txt1",15,"#5555FF");
-  html_str4 += "<br><br>\r\n";
-  html_str4 += "GREEN \r\n";
-  html_str4 += ews.EWS_OnOff_Button("green",60,25,15,"#FFFFFF","#00FF00");
-  html_str4 += ews.EWS_Touch_Slider_T("green", "Txt2");
-  html_str4 += ews.EWS_Sl_Text("Txt2",15,"#00ff00");
-  html_str4 += "<br><br\r\n>";
-  html_str5 = "RED..... \r\n";
-  html_str5 += ews.EWS_OnOff_Button("red",60,25,15,"#FFFFFF","#ff0000");
-  html_str5 += ews.EWS_Touch_Slider_T("red", "Txt3");
-  html_str5 += ews.EWS_Sl_Text("Txt3",15,"#ff0000");
-  html_str5 += "<br><br>\r\n";
-  html_str5 += "RGB..... \r\n";
-  html_str5 += ews.EWS_Touch_Slider_BT("-RGB", "Txt4");
-  html_str5 += ews.EWS_Sl_BoxText("Txt4",30,20,15,"#000000");
-  html_str5 += "<br><br><br>\r\n";  
-  html_str5 += ews.EWS_Close_Button("WS CLOSE",150,40,17);
-  html_str5 += "</body></html>\r\n";
-
-  html_str6 = ""; //The description here is if the string is too large. If you do not want to use it is empty.
-  html_str7 = ""; //The description here is if the string is too large. If you do not want to use it is empty.
-  
+{  
   ews.AP_Connect(ssid, password);
 
-  ews.EWS_HandShake(html_str1, html_str2, html_str3, html_str4, html_str5, html_str6, html_str7);
+  ews.EWS_HandShake_SPIFFS("spiffs_only.html");//File names in the data folder in the sketch folder
   
   CountTime = millis();
 }
@@ -189,7 +128,7 @@ void loop() {
     }
   }else if(ret_str == "_close"){
     delay(100);
-    ews.EWS_HandShake(html_str1, html_str2, html_str3, html_str4, html_str5, html_str6, html_str7);
+    ews.EWS_HandShake_SPIFFS("spiffs_only.html");//File names in the data folder in the sketch folder
     CountTime = millis();
     ret_str = "";
   }

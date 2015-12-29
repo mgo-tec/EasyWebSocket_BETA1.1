@@ -202,7 +202,7 @@ void EasyWebSocket::EWS_HandShake_SPIFFS(String _spiffs)
             
             SPIFFS.begin();
             
-            File f1 = SPIFFS.open(_spiffs, "r");
+            File f1 = SPIFFS.open("/"+_spiffs, "r");
             char c = f1.read();
             client.print(c);
             while(c<0xDE){

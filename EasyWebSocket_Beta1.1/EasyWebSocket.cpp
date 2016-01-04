@@ -314,6 +314,19 @@ void EasyWebSocket::EWS_HTTP_Responce()
         delay(1);
         Serial.println();
         Serial.println("favicon_Client Stop--------------");
+      }else if(req.indexOf("apple-touch-icon") != -1){
+
+        Serial.println();
+        Serial.println("--****GET apple-touch-icon Request************");
+        Serial.print(req);
+        while(client.available()){
+          Serial.write(client.read());
+        }
+        delay(1);
+        client.stop();
+        delay(1);
+        Serial.println();
+        Serial.println("apple-touch-icon_Client Stop--------------");
       }
     }
   }

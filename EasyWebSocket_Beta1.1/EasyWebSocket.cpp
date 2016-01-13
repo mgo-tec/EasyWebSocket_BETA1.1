@@ -505,13 +505,14 @@ void EasyWebSocket::EWS_PING_SEND()
 String EasyWebSocket::EWS_Body_style(String text_color, String bg_color)
 {
   String str;
-  str = "<body text='";
+  str = "<body style='color:";
   str += text_color;
-  str += "' bgcolor='";
+  str += "; background:";
   str += bg_color;
-  str += "'>\r\n";
+  str += ";'>\r\n";
   return str;
 }
+
 
 String EasyWebSocket::EWS_OnOff_Button(String button_id, int width, int height, byte font_size, String f_color, String b_color)
 {

@@ -38,4 +38,4 @@ Other usage is Japanese, please visit my blog.
 
 My Blog: 
 
-https://www.mgo-tec.com
+https://www.mgo-tec.com/blog-entry-ws-lib-beta11-01.html
